@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+<h2 class="page-header">All Books</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Book</th>
+        <th>Genre</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books if book.AdminReadable == "Yes" %}
+    <tr>
+        <th scope="row">{{book.id}}</th>
+        <td><a href="{{url('book_detail',{'nameOfBook':book.Name})}}">{{book.Name}}</a></td>
+        <td>
+            {% if book.Genres is iterable %}
+            <ul class="list-unstyled">
+                {% for genre in book.Genres %}
+                <li><a href="{{url('genre_filter',{'genre':genre})}}">{{genre}}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <a href="{{url('genre_filter',{'genre':book.Genres})}}">{{book.Genres}}</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <button id="submit" type="button" class="btn btn-success" onclick="SearchForm()">Load More</button>
+    </div>
+</div>
+{% endblock %}

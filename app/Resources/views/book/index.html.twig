@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a class="btn btn-default" href="{{url('homepage')}}">Back to All Books</a>
+<hr>
+<h2 class="page-header">{{book.Name}}</h2>
+<ul class="list-group">
+    <li class="list-group-item">Release Date: {{book.ReleaseDate}}</li>
+    <li class="list-group-item">Length: {{book.Length}}</li>
+    <li class="list-group-item">
+        {% if book.Genres is iterable %}
+        Genres:
+        <ul class="list-unstyled">
+            {% for genre in book.Genres %}
+            <li><a href="{{url('genre_filter',{'genre':genre})}}">{{genre}}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        Genre: <a href="{{url('genre_filter',{'genre':book.Genres})}}">{{book.Genres}}</a>
+        {% endif %}
+    </li>
+</ul>
+{% endblock %}

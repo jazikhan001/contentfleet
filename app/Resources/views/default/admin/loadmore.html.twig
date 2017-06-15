@@ -1,0 +1,17 @@
+{% for book in books if book.AdminReadable == "Yes" %}
+<tr>
+    <th scope="row">{{book.id}}</th>
+    <td><a href="{{url('book_detail',{'nameOfBook':book.Name})}}">{{book.Name}}</a></td>
+    <td>
+        {% if book.Genres is iterable %}
+        <ul class="list-unstyled">
+            {% for genre in book.Genres %}
+            <li><a href="{{url('genre_filter',{'genre':genre})}}">{{genre}}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <a href="{{url('genre_filter',{'genre':book.Genres})}}">{{book.Genres}}</a>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}

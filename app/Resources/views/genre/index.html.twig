@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a class="btn btn-default" href="{{url('homepage')}}">Back to All Books</a>
+<hr>
+<h2 class="page-header">{{genreBy}}</h2>
+<ul class="list-group">
+    {% for book in books %}
+    {% if genreBy in book.genres %}
+    <li class="list-group-item">Book: <a href="{{url('book_detail',{'nameOfBook':book.Name})}}">{{book.Name}}</a></li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
